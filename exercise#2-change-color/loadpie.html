@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="pie"></div>
+
+    <script>
+    let orgColor;
+    document.addEventListener("DOMContentLoaded", loadSvg);
+
+    async function loadSvg (){
+        let svgData = await fetch("pie.svg");
+        let mySvg = await svgData.text();
+
+        console.log(mySvg);
+
+        document.querySelector("#pie").innerHTML = mySvg;
+        document.querySelector("#one").setAttribute("fill","#ca1");
+
+    }
+    
+    document.querySelector("#pie").addEventListener("mouseover", showElement);
+
+    function showElement(){
+    let id = event.target.getAttribute("id");
+    orgColor = document.querySelector("#"+id).getAttribute("fill");
+    console.log(orgColor);
+    document.querySelector("#"+id).setAttribute("fill", "#f0f0f0");
+    }
+
+    document.querySelector("#pie").addEventListener("mouseout", showOriginalElement);
+
+    function showOriginalElement(){
+    let id = event.target.getAttribute("id");
+    document.querySelector("#"+id).setAttribute("fill", orgColor);  
+    }
+    </script>
+    
+</body>
+</html>

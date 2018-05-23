@@ -1,0 +1,16 @@
+[
+    {
+        "id":"bike",
+        "text": "this is how my bike looks like"
+    }, 
+
+    {
+        "id":"phone",
+        "text":"this is how my phone looks like"
+    }, 
+
+    {
+        "id":"mac",
+        "text":"this is how my mac looks like"
+    }
+]

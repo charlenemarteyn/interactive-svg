@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="layers"></div>
+    <p id="layersInfo"></p>
+
+    <script>
+    
+    let orgColor;
+    document.addEventListener("DOMContentLoaded", loadSvg);
+
+    async function loadSvg (){
+        let svgData = await fetch("layers.svg");
+        let mySvg = await svgData.text();
+
+        //console.log(mySvg);
+
+        document.querySelector("#layers").innerHTML = mySvg;
+        
+    }
+    
+    document.querySelector("#layers").addEventListener("click", showElement);
+
+    function showElement(){
+        let id = event.target.getAttribute("id");
+            document.getElementById("layersInfo").innerHTML = "This is a id called : " + id;    
+        //console.log(id);
+    }
+
+    async function loadJson (){
+        let jsonData = await fetch("file.json");
+        let myJson = await jsonData.text();
+
+        console.log(myJson);
+
+        document.querySelector("#layersInfo").innerHTML = myJson;
+    }
+    
+    </script>
+    
+</body>
+</html>

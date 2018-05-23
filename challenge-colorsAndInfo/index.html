@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="text"></div>
+    <div id="map"> </div>
+    <script>
+
+        let fillcolor;
+        let newcolor = "#ca1";
+        let areaId;
+        let myJson;
+        let id;
+
+        document.addEventListener("DOMContentLoaded", getData);
+
+        async function getData() {
+
+     //load the svg
+     const svgData = await fetch("map.svg");
+     let mySvg = await svgData.text();
+    // show svg in DOM
+    document.querySelector("#map").innerHTML = mySvg;
+     //console.log(mySvg);
+
+    //load the json
+    const jsonData = await fetch("data.json");
+    myJson = await jsonData.text();
+
+    //change the color on mouseover
+    document.querySelector("svg").addEventListener("mouseover", changeColor);
+    //change color back
+    document.querySelector("svg").addEventListener("mouseout", orgColor);
+            
+        }
+
+        //change color on mouseover
+        function changeColor(){
+            //WHAT HAVE I HOVERED?
+            let area = event.target;
+            areaId = area.id;
+            id = area.parentElement.id;
+            fillcolor = area.getAttribute("fill");
+
+            document.querySelector("#"+areaId).setAttribute("fill", newcolor);
+
+            myJson.forEach(element =>{
+                //see if there is a match
+                if(element.city == id){
+                document.querySelector("#text").textContent = element.city;
+                }
+
+
+
+
+            });
+            console.log(fillcolor);
+        };
+        // change color back on mouse out
+        function orgColor(){
+            document.querySelector("#"+areaId).setAttribute("fill", fillcolor);
+        };
+   
+    
+    </script>
+</body>
+</html>
